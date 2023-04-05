@@ -1,0 +1,22 @@
+﻿
+<div class="page-header" filter-color="orange">
+    <div class="page-header-image" style="background-image:url(assets/img/login.jpg)"></div>
+    <div class="container">
+        <div class="col-md-4 content-center">
+            <div class="card card-login card-plain">
+                <form class="form" [formGroup]="form">
+                    <div class="content" style="font-size: large;">
+                        <h1 class="h1-seo">Add Token Balance </h1> <br><h3>Token Balance: {{user.tokenBalance}}</h3>
+                        <br>
+                        <div class="input-group form-group-no-border input-lg" >
+                            <input type="number" value="50" class="form-control"  #tokenBal />
+                        </div>
+                        <a routerLink="/index" class="btn btn-link" (click)="UpdateBalance(tokenBal.value)">Pay Now</a>
+                        <a routerLink="/index" class="btn btn-link" >Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

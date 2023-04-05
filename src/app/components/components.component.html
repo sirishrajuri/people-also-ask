@@ -1,0 +1,94 @@
+<div class="wrapper">
+    <div class="page-header clear-filter" filter-color="orange">
+        <div class="page-header-image rellax-header" data-rellax-speed="-7" style="background-image: url('assets/img/header.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center brand">
+                <div *ngFor="let alert of alerts">
+                    <ngb-alert [type]="alert.type"  [dismissible]="false" >
+                        <div class="container">
+                            <div class="alert-wrapper">
+                                <button type="button" name="button" class="close" (click)="closeAlert(alert)">
+                                <span aria-hidden="true">
+                                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                                </span>
+                                </button>
+                                <div class="message">
+                                    <ng-container *ngIf="alert.icon">
+                                    <div class="alert-icon">
+                                        <i class="now-ui-icons {{alert.icon}}"></i>
+                                    </div>
+                                    </ng-container>
+                                    <strong>{{alert.strong}} </strong>{{ alert.message }}
+                                </div>
+                            </div>
+                        </div>
+                    </ngb-alert>
+                </div>
+              <h1 class="h1-seo">Hi {{user.firstName}}!</h1>  <h3> Token Balance: {{user.tokenBalance}}</h3><br>        
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" style="font-size: large;">
+                      <div class="input-group form-group-no-border input-lg" >
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="now-ui-icons ui-1_zoom-bold"></i></span>
+                        </div>
+                        <input type="text" formControlName="keywords" class="form-control" placeholder="Start searching by a keyword" [ngClass]="{ 'is-invalid': submitted && f.keywords.errors }" />
+                          <div *ngIf="submitted && f.keywords.errors" class="invalid-feedback">
+                              <div *ngIf="f.keywords.errors.required" style="color: white;">Minimum one keyword is required</div>
+                          </div>
+                      </div>
+                      <div class="input-group form-group-no-border input-lg" >
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="now-ui-icons text_caps-small"></i></span>
+                        </div>
+
+                        <input type="text" formControlName="number" class="form-control"  placeholder="Number of Articles required" [ngClass]="{ 'is-invalid': submitted && f.number.errors }" />
+                        <div *ngIf="submitted && f.number.errors" class="invalid-feedback">
+                            <div *ngIf="f.number.errors.required" style="color: white;">Minimum one article is needed</div>
+                        </div>
+                      </div>
+
+                  <div class="form-group">
+                      <button [disabled]="loading" class="btn btn-primary">
+                          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                          Search
+                      </button>
+                  </div>
+                </form>
+                <table>
+                    <ul>
+                        <li *ngFor="let name of resultKeywords">
+                            <tr>
+                                <td> {{name}} </td>
+                                <td> 
+                                    <button  class="btn btn-outline-dark" (click)="open(classic,'' , '');"> 
+                                    Generate
+                                    </button> 
+                                       <ng-template #classic let-c="close" let-d="dismiss">
+                                           <div class="modal-header justify-content-center">
+                                               <button type="button" class="close" (click)="d('Cross click')">
+                                                   <i class="now-ui-icons ui-1_simple-remove"></i>
+                                               </button>
+                                               <h4 class="title title-up">Generate Article</h4>
+                                           </div>
+                                           <div class="modal-body">
+                                               <p>
+                                                This will create the audio and video files that are based on human content.
+                                                This will also result in a 5 token deduction.
+                                               </p>
+                                           </div>
+                                           <div class="modal-footer">
+                                               <button type="button" class="btn btn-primary" (click)="generate(name);c('Close click');" [routerLink]="['/articles']" >Generate</button>
+                                               <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+                                           </div>
+                                       </ng-template>
+                                </td>
+                            </tr> 
+                        </li>
+                    </ul> 
+                </table>    
+            </div>
+        </div>
+    </div>
+</div>
+
