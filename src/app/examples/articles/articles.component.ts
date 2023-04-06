@@ -81,8 +81,6 @@ export class ArticlesComponent implements OnInit {
   }
 
   articleSelected(query){
-    console.log(query);
-
     for (let index = 0; index < this.resultKeywords.length; index++) {
       const element = this.resultKeywords[index];
       if(element.query==query){
@@ -101,8 +99,6 @@ export class ArticlesComponent implements OnInit {
   }
 
   generateVideo(tof) {
-    console.log(this.articleAudioGenerated);
-    console.log(tof);
     var formDatas: any = new FormData();
     formDatas.append('tof', tof);
     formDatas.append('username', this.user.username);

@@ -52,7 +52,11 @@ export class ComponentsComponent implements OnInit, OnDestroy {
     focus2;
     closeResult: string;
 
-    public alerts: Array<IAlert> = [];
+    static alerts: Array<IAlert> = [];
+
+    get alertView(){
+        return ComponentsComponent.alerts;
+    }
 
     date: {year: number, month: number};
     model: NgbDateStruct;
@@ -97,8 +101,8 @@ export class ComponentsComponent implements OnInit, OnDestroy {
     }
 
     public closeAlert(alert: IAlert) {
-        const index: number = this.alerts.indexOf(alert);
-        this.alerts.splice(index, 1);
+        const index: number = ComponentsComponent.alerts.indexOf(alert);
+        ComponentsComponent.alerts.splice(index, 1);
     }
 
     get f() { return this.form.controls; }
@@ -215,16 +219,18 @@ export class ComponentsComponent implements OnInit, OnDestroy {
     }
 
     generate(name:string) {
-        if(this.user.tokenBalance<5){
-                this.alerts.push({
+        var k:number = this.user.tokenBalance;
+        if(k<5){
+            ComponentsComponent.alerts.push({
                 id: 1,
                 type: 'danger',
                 strong: '',
                 message: 'Minimum token balance of 5 is needede to generate article,audio and video',
                 icon: 'objects_support-17'
             });
+            return;
         }
-        this.alerts.length=0;
+        ComponentsComponent.alerts.length=0;
         
         this.loadingArticle=true;
         var formData: any = new FormData();
@@ -236,6 +242,7 @@ export class ComponentsComponent implements OnInit, OnDestroy {
         this.updateTokenBalance();
         this.httpClient.post(`${API_URL}/generate_article`, formData)
         .subscribe((data:any) => {});
+        this.router.navigate(['/articles']);
     }
 
     open(content, type, modalDimension) {

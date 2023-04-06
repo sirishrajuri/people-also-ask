@@ -29,6 +29,9 @@
                           <p class="card-text">{{contentRendered}}
 
                           </p>
+                          <div *ngIf="!articleAudioGenerated">
+                            <h6> Video generation is in progress</h6>
+                          </div>
                           <video width="320" height="240" [src]="videoSource | safe:'url'" controls *ngIf="articleAudioGenerated"></video>
                         </div>
                       </div>

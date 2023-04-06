@@ -9,6 +9,7 @@ import { AuthGuard } from './_helpers';
 import { RegisterComponent } from './examples/register/register.component';
 import { ArticlesComponent } from './examples/articles/articles.component';
 import { AddTokenBalanceComponent } from './users/addTokenBalance.component';
+import { AllComponent } from './components/allUsers/all.component';
 
 
 // const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
@@ -21,7 +22,9 @@ const routes: Routes =[
     { path: 'profile',     component: ProfileComponent,canActivate: [AuthGuard] },
     { path: 'register',     component: RegisterComponent },
     { path: 'articles', component: ArticlesComponent, canActivate: [AuthGuard] },
-    { path: 'addBalance', component: AddTokenBalanceComponent, canActivate: [AuthGuard] },  
+    { path: 'addBalance', component: AddTokenBalanceComponent, canActivate: [AuthGuard] },
+    { path: 'admin', component: AllComponent, canActivate: [AuthGuard] },
+      
 ];
 
 @NgModule({

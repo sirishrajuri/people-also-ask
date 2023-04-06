@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AccountService,AlertService } from '../_services';
 import { User } from '../_models';
+import { IAlert } from 'app/components/notification/notification.component';
+import { ComponentsComponent } from 'app/components/components.component';
 
 //import { AccountService, AlertService } from './_services';
 
@@ -15,6 +17,7 @@ export class AddTokenBalanceComponent implements OnInit {
     loading = false;
     submitted = false;
     user:User;
+    public alerts: Array<IAlert> = [];
     
     constructor(
         private formBuilder: FormBuilder,
@@ -41,22 +44,43 @@ export class AddTokenBalanceComponent implements OnInit {
                     this.user.tokenBalance = x.tokenBalance;
                 });
         if(!this.user.tokenBalance){
-            console.log("eeror token bal");
             this.user.tokenBalance=0;
         }
-        console.log("before"+this.user.tokenBalance);
         var tb= parseInt(tokenBal);
+        if(tb<0){
+                this.alerts.push({
+                id: 2,
+                type: 'danger',
+                strong: '',
+                message: 'Token balance added cannot be negative',
+                icon: 'objects_support-17'
+            });
+            return
+        }
+        
         this.user.tokenBalance+=tb;
-        console.log("after"+this.user.tokenBalance);
-        this.alertService.success('Token Balance added successfully');
         this.updateUser();
+    }
+
+    public closeAlert(alert: IAlert) {
+        const index: number = this.alerts.indexOf(alert);
+        this.alerts.splice(index, 1);
     }
 
     updateUser() {
         this.accountService.update(this.user.id, this.user)
             .pipe(first())
             .subscribe(
-                data => {});
+                data => {
+                    this.router.navigate(['/index']);
+                });
+                ComponentsComponent.alerts.push({
+                    id: 1,
+                    type: 'success',
+                    strong: '',
+                    message: 'Token Balance added successfully',
+                    icon: 'ui-2_like'
+                });
     }
 
     

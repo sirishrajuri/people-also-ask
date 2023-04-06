@@ -4,7 +4,7 @@
         </div>
         <div class="container">
             <div class="content-center brand">
-                <div *ngFor="let alert of alerts">
+                <div *ngFor="let alert of alertView">
                     <ngb-alert [type]="alert.type"  [dismissible]="false" >
                         <div class="container">
                             <div class="alert-wrapper">
@@ -78,7 +78,7 @@
                                                </p>
                                            </div>
                                            <div class="modal-footer">
-                                               <button type="button" class="btn btn-primary" (click)="generate(name);c('Close click');" [routerLink]="['/articles']" >Generate</button>
+                                               <button type="button" class="btn btn-primary" (click)="generate(name);c('Close click');" >Generate</button>
                                                <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
                                            </div>
                                        </ng-template>

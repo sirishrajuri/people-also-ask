@@ -1,0 +1,37 @@
+
+<div class="page-header" filter-color="orange">
+    <div class="page-header-image" style="background-image:url(assets/img/login.jpg)"></div>
+    <div class="container">
+        <div class="col-md-4 content-center">
+                            <table class="table table-striped scroll" style="font-size: large;color: white;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 30%">First Name</th>
+                                        <th style="width: 30%">Last Name</th>
+                                        <th style="width: 30%">Username</th>
+                                        <th style="width: 10%"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of users">
+                                        <td>{{user.firstName}}</td>
+                                        <td>{{user.lastName}}</td>
+                                        <td>{{user.username}}</td>
+                                        <td style="white-space: nowrap">
+                                            <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
+                                                <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                                                <span *ngIf="!user.isDeleting">Delete</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="!users">
+                                        <td colspan="4" class="text-center">
+                                            <span class="spinner-border spinner-border-lg align-center"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                </div>
+    </div>
+</div>
+

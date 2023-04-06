@@ -9,6 +9,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ComponentsComponent } from './components.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NgbdModalBasic } from './modal/modal.component';
+import { AllComponent } from './allUsers/all.component';
 
 
 
@@ -26,7 +27,8 @@ import { NgbdModalBasic } from './modal/modal.component';
         ComponentsComponent,
         NavigationComponent,
         NotificationComponent,
-        NgbdModalBasic
+        NgbdModalBasic,
+        AllComponent
     ],
     exports:[ ComponentsComponent ]
 })
